@@ -1,0 +1,26 @@
+.form-container {
+  width: 100%;
+  max-width: 450px;
+  padding: 15px 30px;
+  margin: 0 auto;
+  background-color: #fefefe;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.sign-up-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.sign-in-button {
+  margin-top: 25px;
+}
+
+.sign-up-link {
+  font-size: 16px;
+  font-weight: 500;
+}

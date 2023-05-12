@@ -1,0 +1,12 @@
+.input-container {
+  margin-bottom: 10px;
+}
+
+.error-text {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+
+  &--visible {
+    opacity: 1;
+  }
+}

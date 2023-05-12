@@ -12,11 +12,8 @@
     "noFallthroughCasesInSwitch": true,
     "module": "commonjs",
     "moduleResolution": "node",
-    "isolatedModules": true,
     "noEmit": true,
     "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "jsx": "react-jsx"
   },
   "include": ["src"], // Specify the files to include in compilation
