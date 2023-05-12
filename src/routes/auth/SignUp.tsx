@@ -1,6 +1,6 @@
 import { FC } from "react";
 // libs
-import { Button, Typography, Space } from "antd";
+import { Button, Typography } from "antd";
 import { useForm } from "react-hook-form";
 import { MailOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
 // components
