@@ -3,8 +3,11 @@ import { FC } from "react";
 import { Button, Typography } from "antd";
 import { useForm } from "react-hook-form";
 import { MailOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 // components
 import MainInput from "../../components/MainInput/MainInput";
+// routes
+import { AUTH_ROUTES } from "../../constants/routes";
 // styles
 import "./auth.scss";
 // utils
@@ -14,8 +17,6 @@ import {
   LAST_NAME_VALIDATION,
   PASSWORD_VALIDATION,
 } from "../../utils/validation-rules";
-import { Link } from "react-router-dom";
-import { AUTH_ROUTES } from "../../constants/routes";
 
 interface ISignUpForm {
   email: string;
