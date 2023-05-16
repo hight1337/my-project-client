@@ -13,3 +13,27 @@
 .logo.collapsed {
   transform: scale(0.7);
 }
+
+.social-menu-link--container {
+  display: flex;
+  justify-content: space-between;
+  opacity: 1;
+  width: 100%;
+  transition: opacity 0.3s;
+}
+
+.social-menu-link--container.collapsed {
+  opacity: 0;
+}
+
+.social-menu-link {
+  display: block;
+  font-size: 25px;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}

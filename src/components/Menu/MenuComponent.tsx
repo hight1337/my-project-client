@@ -8,6 +8,9 @@ import {
   SnippetsOutlined,
   PictureOutlined,
   InfoCircleOutlined,
+  InstagramOutlined,
+  LinkedinOutlined,
+  FacebookOutlined,
 } from "@ant-design/icons";
 // styles
 import "./menu.scss";
@@ -15,6 +18,17 @@ import "./menu.scss";
 const MenuComponent: FC = () => {
   const [collapsed, setCollapsed] = useState(true);
   const [collapsedWidth, setCollapsedWidth] = useState(80);
+
+  const onInstagramClick = () => {
+    window.open("https://www.instagram.com/", "_blank");
+  };
+  const onLinkedinClick = () => {
+    window.open("https://www.linkedin.com/", "_blank");
+  };
+  const onFacebookClick = () => {
+    window.open("https://www.facebook.com/", "_blank");
+  };
+
   return (
     <Sider
       breakpoint="lg"
@@ -58,6 +72,35 @@ const MenuComponent: FC = () => {
           About us
         </Menu.Item>
       </Menu>
+      <div
+        style={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          padding: "20px 25px",
+          width: "100%",
+          maxWidth: 200,
+        }}
+      >
+        <div
+          className={`social-menu-link--container ${
+            collapsed ? "collapsed" : ""
+          }`}
+        >
+          <InstagramOutlined
+            className="social-menu-link"
+            onClick={onInstagramClick}
+          />
+          <LinkedinOutlined
+            className="social-menu-link"
+            onClick={onLinkedinClick}
+          />
+          <FacebookOutlined
+            className="social-menu-link"
+            onClick={onFacebookClick}
+          />
+        </div>
+      </div>
     </Sider>
   );
 };
