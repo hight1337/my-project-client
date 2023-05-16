@@ -1,0 +1,15 @@
+.demo-logo-vertical {
+  padding: 10px 0;
+}
+.logo {
+  display: block;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  transition: transform 0.3s;
+  overflow: hidden;
+}
+
+.logo.collapsed {
+  transform: scale(0.7);
+}
