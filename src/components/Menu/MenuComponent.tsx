@@ -2,6 +2,9 @@ import { FC, useState } from "react";
 // libs
 import { Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
+import { useNavigate } from "react-router-dom";
+// constants
+import { MAIN_ROUTES } from "constants/routes";
 // assets
 import {
   HomeOutlined,
@@ -18,6 +21,7 @@ import "./menu.scss";
 const MenuComponent: FC = () => {
   const [collapsed, setCollapsed] = useState(true);
   const [collapsedWidth, setCollapsedWidth] = useState(80);
+  const navigate = useNavigate();
 
   const onInstagramClick = () => {
     window.open("https://www.instagram.com/", "_blank");
@@ -58,30 +62,38 @@ const MenuComponent: FC = () => {
           className={`logo ${collapsed ? "collapsed" : ""}`}
         />
       </div>
-      <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
-        <Menu.Item icon={<HomeOutlined />} key="1">
-          Home
-        </Menu.Item>
-        <Menu.Item icon={<SnippetsOutlined />} key="2">
-          My posts
-        </Menu.Item>
-        <Menu.Item icon={<PictureOutlined />} key="3">
-          Gallery
-        </Menu.Item>
-        <Menu.Item icon={<InfoCircleOutlined />} key="4">
-          About us
-        </Menu.Item>
-      </Menu>
-      <div
-        style={{
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          padding: "20px 25px",
-          width: "100%",
-          maxWidth: 200,
-        }}
-      >
+      <Menu
+        theme="dark"
+        mode="inline"
+        defaultSelectedKeys={["1"]}
+        items={[
+          {
+            key: "1",
+            icon: <HomeOutlined />,
+            label: "Home",
+            onClick: () => navigate(MAIN_ROUTES.HOME),
+          },
+          {
+            key: "2",
+            icon: <SnippetsOutlined />,
+            label: "My posts",
+            onClick: () => navigate(MAIN_ROUTES.MY_POST),
+          },
+          {
+            key: "3",
+            icon: <PictureOutlined />,
+            label: "Gallery",
+            onClick: () => navigate(MAIN_ROUTES.GALLERY),
+          },
+          {
+            key: "4",
+            icon: <InfoCircleOutlined />,
+            label: "About us",
+            onClick: () => navigate(MAIN_ROUTES.ABOUT_US),
+          },
+        ]}
+      ></Menu>
+      <div className="social-menu--wrapper">
         <div
           className={`social-menu-link--container ${
             collapsed ? "collapsed" : ""

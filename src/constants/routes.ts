@@ -5,4 +5,7 @@ export const AUTH_ROUTES = {
 
 export const MAIN_ROUTES = {
   HOME: "/",
+  ABOUT_US: "/about-us",
+  MY_POST: "/my-post",
+  GALLERY: "/gallery",
 } as const;

@@ -37,3 +37,12 @@
     transform: scale(1.2);
   }
 }
+
+.social-menu--wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 20px 25px;
+  width: 100%;
+  max-width: 200px;
+}

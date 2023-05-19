@@ -2,19 +2,19 @@ import { FC } from "react";
 // libs
 import { Layout } from "antd";
 import { Outlet } from "react-router-dom";
+// components
 import MenuComponent from "components/Menu/MenuComponent";
+import AppHeader from "components/Header/AppHeader";
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 const MainLayout: FC = () => {
   return (
     <Layout>
       <MenuComponent />
       <Layout>
-        <Header style={{ backgroundColor: "red" }}>
-          <h1>Header</h1>
-        </Header>
-        <Content>
+        <AppHeader />
+        <Content className="content-container">
           <Outlet />
         </Content>
       </Layout>

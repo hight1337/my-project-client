@@ -2,7 +2,7 @@
 import { Routes, Route } from "react-router-dom";
 // routes
 import { SignIn, SignUp } from "./routes/auth";
-import { Main } from "./routes/main";
+import { Main, AboutUs, Gallery, MyPosts } from "./routes/main";
 import NotFound from "./routes/NotFound";
 // layouts
 import AuthLayout from "./routes/layout/AuthLayout";
@@ -20,6 +20,9 @@ function App() {
 
       <Route path="/" element={<MainLayout />}>
         <Route index path={MAIN_ROUTES.HOME} element={<Main />} />
+        <Route path={MAIN_ROUTES.MY_POST} element={<MyPosts />} />
+        <Route path={MAIN_ROUTES.ABOUT_US} element={<AboutUs />} />
+        <Route path={MAIN_ROUTES.GALLERY} element={<Gallery />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />
