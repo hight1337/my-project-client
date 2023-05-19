@@ -13,7 +13,6 @@ const { Title } = Typography;
 
 const AppHeader: FC = () => {
   const location = useLocation();
-  console.log(location.pathname);
   return (
     <Header className="app-header">
       <div className="header-container">

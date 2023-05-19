@@ -18,9 +18,21 @@ import {
 // styles
 import "./menu.scss";
 
-const MenuComponent: FC = () => {
-  const [collapsed, setCollapsed] = useState(true);
-  const [collapsedWidth, setCollapsedWidth] = useState(80);
+interface IProps {
+  menuCollapsed: boolean;
+  setMenuCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+  collapsedWidth: number;
+  setCollapsedWidth: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const MenuComponent: FC<IProps> = ({
+  menuCollapsed,
+  setMenuCollapsed,
+  collapsedWidth,
+  setCollapsedWidth,
+}) => {
+  // const [collapsed, setCollapsed] = useState(true);
+  // const [collapsedWidth, setCollapsedWidth] = useState(80);
   const navigate = useNavigate();
 
   const onInstagramClick = () => {
@@ -39,7 +51,7 @@ const MenuComponent: FC = () => {
       collapsedWidth={collapsedWidth}
       style={{
         minHeight: "100vh",
-        position: "sticky",
+        position: "fixed",
         top: 0,
         left: 0,
         bottom: 0,
@@ -48,18 +60,18 @@ const MenuComponent: FC = () => {
       onBreakpoint={(broken) => {
         setCollapsedWidth(broken ? 0 : 80);
       }}
-      onMouseOver={() => setCollapsed(false)}
-      onMouseLeave={() => setCollapsed(true)}
-      collapsed={collapsed}
+      onMouseOver={() => setMenuCollapsed(false)}
+      onMouseLeave={() => setMenuCollapsed(true)}
+      collapsed={menuCollapsed}
       onCollapse={(collapsed) => {
-        !collapsedWidth && setCollapsed(collapsed);
+        !collapsedWidth && setMenuCollapsed(collapsed);
       }}
     >
       <div className="demo-logo-vertical">
         <img
           src="./assets/logo.png"
           alt="logo"
-          className={`logo ${collapsed ? "collapsed" : ""}`}
+          className={`logo ${menuCollapsed ? "collapsed" : ""}`}
         />
       </div>
       <Menu
@@ -96,7 +108,7 @@ const MenuComponent: FC = () => {
       <div className="social-menu--wrapper">
         <div
           className={`social-menu-link--container ${
-            collapsed ? "collapsed" : ""
+            menuCollapsed ? "collapsed" : ""
           }`}
         >
           <InstagramOutlined
