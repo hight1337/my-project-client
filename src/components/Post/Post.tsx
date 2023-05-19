@@ -37,10 +37,15 @@ const Post: FC<IProps> = ({
       <Space style={{ paddingLeft: 20, margin: "15px 0 10px 0" }}>
         <ClockCircleOutlined />
         <Text>{dateCreated}</Text>
-        <Divider type="vertical" style={{ margin: 0 }} />
+        <Divider
+          type="vertical"
+          style={{ margin: 0, height: 20, backgroundColor: "#e2e2e2" }}
+        />
         <Avatar
           size={30}
-          style={{ backgroundColor: randomColor() }}
+          style={{
+            backgroundColor: randomColor(),
+          }}
           icon={<UserOutlined />}
         />
         <Text>{author}</Text>
