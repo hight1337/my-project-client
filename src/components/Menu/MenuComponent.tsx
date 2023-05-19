@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 // libs
 import { Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
