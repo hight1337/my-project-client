@@ -51,7 +51,7 @@ const AboutUs: FC = () => {
         </Paragraph>
         <Paragraph className="about-us--paragraph">
           In addition to news coverage, we also provide a platform for the
-          <b>University News</b> community to voice their opinions, share their
+          <b> University News</b> community to voice their opinions, share their
           experiences, and engage in meaningful discussions. We believe in the
           power of dialogue and the ability of diverse perspectives to enrich
           our collective understanding.
