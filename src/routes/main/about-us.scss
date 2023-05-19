@@ -1,0 +1,21 @@
+.about-us--container {
+  display: flex;
+  width: 100%;
+  gap: 50px;
+}
+.about-us--section {
+  width: 65%;
+}
+
+.about-us-contacts--section {
+  width: 35%;
+}
+
+.about-us--paragraph {
+  font-size: 16px;
+}
+
+.about-us--phone {
+  font-size: 28px;
+  font-weight: 600;
+}
