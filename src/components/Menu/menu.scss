@@ -39,10 +39,15 @@
 }
 
 .social-menu--wrapper {
+  display: block;
   position: fixed;
   bottom: 0;
   left: 0;
   padding: 20px 25px;
   width: 100%;
   max-width: 200px;
+
+  &.collapsed {
+    display: none;
+  }
 }

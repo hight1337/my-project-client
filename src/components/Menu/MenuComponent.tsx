@@ -105,7 +105,9 @@ const MenuComponent: FC<IProps> = ({
           },
         ]}
       ></Menu>
-      <div className="social-menu--wrapper">
+      <div
+        className={`social-menu--wrapper ${menuCollapsed ? "collapsed" : ""} `}
+      >
         <div
           className={`social-menu-link--container ${
             menuCollapsed ? "collapsed" : ""
