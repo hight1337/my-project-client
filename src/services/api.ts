@@ -20,10 +20,10 @@ let isRefreshing = false;
 // Create an instance of Axios
 const $api: AxiosInstance = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL || "http://localhost:5000",
+  withCredentials: true,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
-    "Cache-Control": "no-cache",
   },
 });
 
