@@ -2,10 +2,12 @@ import { FC } from "react";
 // libs
 import { Avatar, Button, Typography } from "antd";
 import { Header } from "antd/es/layout/layout";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 // hooks
 import { useAppSelector } from "hooks/redux";
 import { useLogout } from "hooks/useLogout";
+// routes
+import { MAIN_ROUTES } from "constants/routes";
 // assets
 import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 // styles
@@ -19,9 +21,10 @@ const { Title } = Typography;
 
 const AppHeader: FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const currentUser = useAppSelector(userSelector);
   const { userLogout } = useLogout();
-
+  const shouldShowUserInfoSection = location.pathname !== MAIN_ROUTES.PROFILE;
   return (
     <Header className="app-header">
       <div className="header-container">
@@ -29,10 +32,19 @@ const AppHeader: FC = () => {
           {returnRouteName(location.pathname)}
         </Title>
         <div className="user-info--container">
-          <Title level={5} style={{ margin: 0 }}>
-            Hello {currentUser?.firstName}
-          </Title>
-          <Avatar className="user-avatar" icon={<UserOutlined />} />
+          {shouldShowUserInfoSection && (
+            <>
+              <Title level={5} style={{ margin: 0 }}>
+                Hello {currentUser?.firstName}
+              </Title>
+              <Avatar
+                onClick={() => navigate(MAIN_ROUTES.PROFILE)}
+                className="user-avatar"
+                icon={<UserOutlined />}
+              />
+            </>
+          )}
+
           <Button
             type="ghost"
             title="Logout"

@@ -50,3 +50,19 @@ export const LAST_NAME_VALIDATION = {
     message: "Last name must contain only letters",
   },
 };
+
+export const TITLE_VALIDATION = {
+  required: "Title is required",
+  minLength: {
+    value: 2,
+    message: "Title must be at least 2 characters",
+  },
+};
+
+export const SHORT_DESCRIPTION_VALIDATION = {
+  required: "Short description is required",
+};
+
+export const CONTENT_VALIDATION = {
+  required: "Content is required",
+};

@@ -75,14 +75,16 @@ $api.interceptors.response.use(
           const retryOriginalRequest = await $api(originalRequest);
           isRefreshing = false;
           return retryOriginalRequest;
-        } catch (refreshError) {
+        } catch (refreshError: any) {
           isRefreshing = false;
-          showErrorNotification(
-            "Your session has expired. Please log in again."
-          );
-          removeItemFromLocalStorage(USER_ACCESS_TOKEN);
-          await logOut();
-          return Promise.reject(refreshError);
+          if (refreshError.response.status === 401) {
+            showErrorNotification(
+              "Your session has expired. Please log in again."
+            );
+            removeItemFromLocalStorage(USER_ACCESS_TOKEN);
+            await logOut();
+            return Promise.reject(refreshError);
+          }
         }
       }
     }

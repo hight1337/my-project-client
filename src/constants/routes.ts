@@ -8,4 +8,6 @@ export const MAIN_ROUTES = {
   ABOUT_US: "/about-us",
   MY_POST: "/my-posts",
   GALLERY: "/gallery",
+  POST: "/post",
+  PROFILE: "/profile",
 } as const;

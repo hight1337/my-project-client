@@ -5,7 +5,14 @@ import { Space, Spin } from "antd";
 import { useMe } from "hooks/useMe";
 // routes
 import { SignIn, SignUp } from "./routes/auth";
-import { Main, AboutUs, Gallery, MyPosts } from "./routes/main";
+import {
+  Main,
+  AboutUs,
+  Gallery,
+  MyPosts,
+  PostPage,
+  Profile,
+} from "./routes/main";
 import NotFound from "./routes/NotFound";
 // layouts
 import AuthLayout from "./routes/layout/AuthLayout";
@@ -41,6 +48,8 @@ function App() {
         <Route path={MAIN_ROUTES.MY_POST} element={<MyPosts />} />
         <Route path={MAIN_ROUTES.ABOUT_US} element={<AboutUs />} />
         <Route path={MAIN_ROUTES.GALLERY} element={<Gallery />} />
+        <Route path={`${MAIN_ROUTES.POST}/:postId`} element={<PostPage />} />
+        <Route path={MAIN_ROUTES.PROFILE} element={<Profile />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

@@ -10,6 +10,10 @@ export const returnRouteName = (route: string) => {
       return "My Posts";
     case MAIN_ROUTES.GALLERY:
       return "Gallery";
+    case MAIN_ROUTES.POST:
+      return "Post";
+    case MAIN_ROUTES.PROFILE:
+      return "Profile";
     default:
       return "Home";
   }

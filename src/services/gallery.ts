@@ -17,3 +17,10 @@ export const getGalleryImages = async ({
   );
   return response.data;
 };
+
+export const getRandomImage = async () => {
+  const response = await axios.get<IUnsplashPhoto>(
+    `${UNSPLASH_URL}/photos/random?client_id=${process.env.REACT_APP_UNSPLASH_ACCESS_KEY}`
+  );
+  return response.data;
+};

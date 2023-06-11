@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 // libs
 import { Typography, Input } from "antd";
 import { Controller, LiteralUnion, RegisterOptions } from "react-hook-form";
@@ -10,7 +10,7 @@ interface IMainInputProps {
   inputLabel: string;
   inputName: string;
   inputPlaceholder: string;
-  inputPrefixIcon: JSX.Element;
+  inputPrefixIcon?: JSX.Element;
   inputType: LiteralUnion<"email" | "password" | "text", string>;
   allowClear?: boolean;
   autoFocus?: boolean;

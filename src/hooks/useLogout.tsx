@@ -17,7 +17,10 @@ import { USER_ACCESS_TOKEN } from "constants/local-sorage";
 import { AxiosError } from "axios";
 // utils
 import { removeItemFromLocalStorage } from "utils/local-storage";
-import { showErrorNotification } from "utils/notifications";
+import {
+  showErrorNotification,
+  showSuccessNotification,
+} from "utils/notifications";
 
 export const useLogout = () => {
   const navigate = useNavigate();
@@ -26,6 +29,7 @@ export const useLogout = () => {
     onSuccess: () => {
       dispatch(removeUser());
       removeItemFromLocalStorage(USER_ACCESS_TOKEN);
+      showSuccessNotification("You have successfully logged out!");
       navigate(AUTH_ROUTES.SIGN_IN, { replace: true });
     },
     onError: (error: AxiosError<AxiosError>) => {

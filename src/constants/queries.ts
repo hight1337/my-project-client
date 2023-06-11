@@ -15,3 +15,13 @@ export const GALLERY_QUERIES = {
   GET_ALL: "gallery-get-all",
   GET_RANDOM_ONE: "gallery-get-random-one",
 } as const;
+
+// POSTS
+export const POSTS_QUERIES = {
+  GET_MY_POSTS: "posts-get-my-posts",
+  GET_ALL: "posts-get-all",
+  GET_ONE: "posts-get-one",
+  CREATE_POST: "posts-create",
+  UPDATE_POST: "posts-update",
+  DELETE_POST: "posts-delete",
+} as const;
