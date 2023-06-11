@@ -3,11 +3,24 @@ import { FC } from "react";
 import { Button, Typography } from "antd";
 import { useForm } from "react-hook-form";
 import { MailOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useMutation } from "react-query";
+// hooks
+import { useAppDispatch } from "hooks/redux";
+// api
+import { userSignUp } from "services/auth";
+// store
+import { setUser } from "store/user/reducers";
 // components
 import MainInput from "../../components/MainInput/MainInput";
+// constants
+import { USER_ACCESS_TOKEN } from "constants/local-sorage";
 // routes
-import { AUTH_ROUTES } from "../../constants/routes";
+import { AUTH_ROUTES, MAIN_ROUTES } from "../../constants/routes";
+// types
+import { AxiosError } from "axios";
+// queries
+import { AUTH_QUERIES } from "constants/queries";
 // styles
 import "./auth.scss";
 // utils
@@ -17,6 +30,8 @@ import {
   LAST_NAME_VALIDATION,
   PASSWORD_VALIDATION,
 } from "../../utils/validation-rules";
+import { showErrorNotification } from "utils/notifications";
+import { setItemToLocalStorage } from "utils/local-storage";
 
 interface ISignUpForm {
   email: string;
@@ -36,8 +51,22 @@ const SignUp: FC = () => {
     mode: "onSubmit",
   });
 
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const { isLoading, mutate } = useMutation(AUTH_QUERIES.SIGN_UP, userSignUp, {
+    onSuccess: (data) => {
+      const { user } = data;
+      dispatch(setUser(user));
+      setItemToLocalStorage(USER_ACCESS_TOKEN, data.accessToken);
+      navigate(MAIN_ROUTES.HOME, { replace: true });
+    },
+    onError: (error: AxiosError<AxiosError>) => {
+      showErrorNotification(error.response?.data.message);
+    },
+  });
   const onSubmit = (data: ISignUpForm) => {
-    console.log("data", data);
+    mutate(data);
   };
   return (
     <div className="form-container">
@@ -91,6 +120,7 @@ const SignUp: FC = () => {
         type="primary"
         size="large"
         className="sign-in-button"
+        loading={isLoading}
         block
         onClick={handleSubmit(onSubmit)}
       >
@@ -100,7 +130,7 @@ const SignUp: FC = () => {
         <Title level={5} style={{ marginBottom: 0 }}>
           You already have an account?
         </Title>
-        <Link to={`/auth/${AUTH_ROUTES.SIGN_IN}`} className="sign-up-link">
+        <Link to={AUTH_ROUTES.SIGN_IN} className="sign-up-link">
           Sign In
         </Link>
       </div>

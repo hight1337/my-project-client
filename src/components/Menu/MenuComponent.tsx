@@ -2,7 +2,7 @@ import { FC } from "react";
 // libs
 import { Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 // constants
 import { MAIN_ROUTES } from "constants/routes";
 // assets
@@ -17,6 +17,8 @@ import {
 } from "@ant-design/icons";
 // styles
 import "./menu.scss";
+// utils
+import { menuActiveIndex } from "utils/route-name";
 
 interface IProps {
   menuCollapsed: boolean;
@@ -33,6 +35,7 @@ const MenuComponent: FC<IProps> = ({
 }) => {
   // const [collapsed, setCollapsed] = useState(true);
   // const [collapsedWidth, setCollapsedWidth] = useState(80);
+  const { pathname } = useLocation();
   const navigate = useNavigate();
 
   const onInstagramClick = () => {
@@ -77,7 +80,7 @@ const MenuComponent: FC<IProps> = ({
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={["1"]}
+        defaultSelectedKeys={[menuActiveIndex(pathname)]}
         items={[
           {
             key: "1",

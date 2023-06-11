@@ -1,5 +1,8 @@
 // libs
 import { Routes, Route } from "react-router-dom";
+import { Space, Spin } from "antd";
+// hooks
+import { useMe } from "hooks/useMe";
 // routes
 import { SignIn, SignUp } from "./routes/auth";
 import { Main, AboutUs, Gallery, MyPosts } from "./routes/main";
@@ -11,9 +14,24 @@ import MainLayout from "./routes/layout/MainLayout";
 import { AUTH_ROUTES, MAIN_ROUTES } from "./constants/routes";
 
 function App() {
+  const { isLoading } = useMe();
+  if (isLoading) {
+    return (
+      <Space
+        style={{
+          height: "100vh",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+        }}
+      >
+        <Spin size="large" />
+      </Space>
+    );
+  }
   return (
     <Routes>
-      <Route path="auth/*" element={<AuthLayout />}>
+      <Route element={<AuthLayout />}>
         <Route index path={AUTH_ROUTES.SIGN_IN} element={<SignIn />} />
         <Route path={AUTH_ROUTES.SIGN_UP} element={<SignUp />} />
       </Route>

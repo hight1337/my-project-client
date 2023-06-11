@@ -1,9 +1,13 @@
 import { Button, FloatButton, Image, Space, Spin } from "antd";
 import { FC, useState } from "react";
+// libs
 import { useQuery } from "react-query";
+// api
 import { getGalleryImages } from "services/gallery";
 // assets
 import { ArrowUpOutlined } from "@ant-design/icons";
+// queries
+import { GALLERY_QUERIES } from "constants/queries";
 // types
 import { IUnsplashPhoto } from "types/unsplash-types";
 
@@ -12,7 +16,7 @@ const Gallery: FC = () => {
   const [galleryPhotos, setGalleryPhotos] = useState<IUnsplashPhoto[]>([]);
 
   const { isLoading, isFetching } = useQuery(
-    ["gallery", page],
+    [GALLERY_QUERIES.GET_ALL, page],
     () => getGalleryImages({ count: 20, page }),
     {
       refetchOnWindowFocus: false,
@@ -51,7 +55,6 @@ const Gallery: FC = () => {
         style={{
           width: "100%",
           justifyContent: "space-around",
-          gap: 20,
           marginTop: 20,
         }}
       >
@@ -62,10 +65,10 @@ const Gallery: FC = () => {
               src={photo.urls.regular}
               style={{
                 width: "100%",
-                height: "100%",
+                height: "auto",
                 objectFit: "cover",
                 borderRadius: "10px",
-                maxWidth: "350px",
+                maxWidth: "400px",
                 boxShadow: "0 0 10px rgba(0,0,0,0.5)",
               }}
             />

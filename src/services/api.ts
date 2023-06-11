@@ -4,10 +4,22 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
+// constants
+import { USER_ACCESS_TOKEN } from "constants/local-sorage";
+// utils
+import {
+  getItemFromLocalStorage,
+  removeItemFromLocalStorage,
+  setItemToLocalStorage,
+} from "utils/local-storage";
+import { refreshTokens } from "./auth";
+import { logOut } from "./user";
+import { showErrorNotification } from "utils/notifications";
 
+let isRefreshing = false;
 // Create an instance of Axios
 const $api: AxiosInstance = axios.create({
-  baseURL: process.env.BASE_URL || "http://localhost:5000",
+  baseURL: process.env.REACT_APP_BASE_URL || "http://localhost:5000",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
@@ -23,8 +35,11 @@ const $api: AxiosInstance = axios.create({
 $api.interceptors.request.use(
   (config: InternalAxiosRequestConfig<AxiosRequestConfig>) => {
     // Get the access token from local storage
-    const accessToken: string = "your-access-token";
-
+    const accessToken: string | null =
+      getItemFromLocalStorage(USER_ACCESS_TOKEN);
+    if (!accessToken) {
+      return config;
+    }
     // Attach the access token to the Authorization header
     config.headers.Authorization = `Bearer ${accessToken}`;
 
@@ -52,20 +67,28 @@ $api.interceptors.response.use(
     };
     // Check if the response status is 401 (Unauthorized) and if the original request has not already been retried
     if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      try {
-        // 1.Sent the request to refresh the access token
-        // 2.Update outdated access token with the new one from the response
-
-        //Retry the original request
-        return $api(originalRequest);
-      } catch (_error) {
-        // If refreshing the access token fails, we logout the user
-        return Promise.reject(_error);
+      if (!isRefreshing) {
+        isRefreshing = true;
+        try {
+          const response = await refreshTokens();
+          setItemToLocalStorage(USER_ACCESS_TOKEN, response.accessToken);
+          const retryOriginalRequest = await $api(originalRequest);
+          isRefreshing = false;
+          return retryOriginalRequest;
+        } catch (refreshError) {
+          isRefreshing = false;
+          showErrorNotification(
+            "Your session has expired. Please log in again."
+          );
+          removeItemFromLocalStorage(USER_ACCESS_TOKEN);
+          await logOut();
+          return Promise.reject(refreshError);
+        }
       }
     }
-
     // If the error status is not 401, we just reject with the error
     return Promise.reject(error);
   }
 );
+
+export default $api;
