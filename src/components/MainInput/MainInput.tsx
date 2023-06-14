@@ -17,6 +17,7 @@ interface IMainInputProps {
   control: any;
   validationRules: RegisterOptions;
   errorText: string | undefined;
+  defaultValue?: string;
 }
 
 const MainInput: FC<IMainInputProps> = ({
@@ -30,6 +31,7 @@ const MainInput: FC<IMainInputProps> = ({
   validationRules,
   errorText,
   control,
+  defaultValue,
 }) => {
   return (
     <div className="input-container">
@@ -39,6 +41,7 @@ const MainInput: FC<IMainInputProps> = ({
           name={inputName}
           control={control}
           rules={validationRules}
+          defaultValue={defaultValue}
           render={({ field }) => (
             <Input.Password
               {...field}
@@ -57,6 +60,7 @@ const MainInput: FC<IMainInputProps> = ({
           name={inputName}
           control={control}
           rules={validationRules}
+          defaultValue={defaultValue}
           render={({ field }) => (
             <Input
               {...field}

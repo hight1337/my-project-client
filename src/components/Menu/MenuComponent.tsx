@@ -14,6 +14,7 @@ import {
   InstagramOutlined,
   LinkedinOutlined,
   FacebookOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 // styles
 import "./menu.scss";
@@ -33,8 +34,6 @@ const MenuComponent: FC<IProps> = ({
   collapsedWidth,
   setCollapsedWidth,
 }) => {
-  // const [collapsed, setCollapsed] = useState(true);
-  // const [collapsedWidth, setCollapsedWidth] = useState(80);
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
@@ -80,7 +79,7 @@ const MenuComponent: FC<IProps> = ({
       <Menu
         theme="dark"
         mode="inline"
-        defaultSelectedKeys={[menuActiveIndex(pathname)]}
+        selectedKeys={[menuActiveIndex(pathname)]}
         items={[
           {
             key: "1",
@@ -102,6 +101,12 @@ const MenuComponent: FC<IProps> = ({
           },
           {
             key: "4",
+            icon: <UserOutlined />,
+            label: "My Profile",
+            onClick: () => navigate(MAIN_ROUTES.PROFILE),
+          },
+          {
+            key: "5",
             icon: <InfoCircleOutlined />,
             label: "About us",
             onClick: () => navigate(MAIN_ROUTES.ABOUT_US),

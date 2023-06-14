@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { MAIN_ROUTES } from "constants/routes";
 // assets
 import { ClockCircleOutlined, UserOutlined } from "@ant-design/icons";
+import { POST_IMAGE_URL } from "constants/helpers";
 // types
 import { IPost } from "types/posts";
 // styles
@@ -35,11 +36,7 @@ const Post: FC<IProps> = ({ post }) => {
   return (
     <div className="post-container">
       <div style={{ overflow: "hidden" }}>
-        <Image
-          className="post-image"
-          src="https://images.unsplash.com/photo-1600275066165-e4a26be839ec?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-          preview={false}
-        />
+        <Image className="post-image" src={POST_IMAGE_URL} preview={false} />
       </div>
       <Space
         direction="horizontal"

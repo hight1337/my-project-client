@@ -20,6 +20,7 @@ interface IProps {
   maxRows?: number;
   allowClear?: boolean;
   autoFocus?: boolean;
+  defaultValue?: string;
 }
 const MainTextArea: FC<IProps> = ({
   inputLabel,
@@ -32,6 +33,7 @@ const MainTextArea: FC<IProps> = ({
   allowClear = true,
   autoFocus = false,
   errorText,
+  defaultValue,
 }) => {
   return (
     <div className="input-container">
@@ -40,6 +42,7 @@ const MainTextArea: FC<IProps> = ({
         control={control}
         name={inputName}
         rules={validationRules}
+        defaultValue={defaultValue}
         render={({ field }) => (
           <TextArea
             {...field}

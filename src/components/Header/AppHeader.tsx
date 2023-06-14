@@ -46,12 +46,15 @@ const AppHeader: FC = () => {
           )}
 
           <Button
-            type="ghost"
+            type="default"
             title="Logout"
+            danger
             onClick={() => userLogout()}
             style={{ marginLeft: 15 }}
-            icon={<LogoutOutlined style={{ fontSize: 21, color: "#f7401c" }} />}
-          />
+            icon={<LogoutOutlined />}
+          >
+            Logout
+          </Button>
         </div>
       </div>
     </Header>

@@ -15,7 +15,7 @@ export const returnRouteName = (route: string) => {
     case MAIN_ROUTES.PROFILE:
       return "Profile";
     default:
-      return "Home";
+      return "Post";
   }
 };
 
@@ -27,8 +27,10 @@ export const menuActiveIndex = (route: string) => {
       return "2";
     case MAIN_ROUTES.GALLERY:
       return "3";
-    case MAIN_ROUTES.ABOUT_US:
+    case MAIN_ROUTES.PROFILE:
       return "4";
+    case MAIN_ROUTES.ABOUT_US:
+      return "5";
     default:
       return "1";
   }

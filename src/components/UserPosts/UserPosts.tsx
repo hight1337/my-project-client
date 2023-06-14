@@ -15,7 +15,7 @@ interface IProps {
 const UserPosts: FC<IProps> = ({ posts }) => {
   return (
     <>
-      {!posts || posts.length === 0 ? (
+      {!posts ? (
         <Space
           direction="vertical"
           style={{

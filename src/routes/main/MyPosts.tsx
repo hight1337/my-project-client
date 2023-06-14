@@ -11,7 +11,6 @@ import { POSTS_QUERIES } from "constants/queries";
 // api
 import { getMyPosts } from "services/posts";
 // types
-import { IPost } from "types/posts";
 import { AxiosError } from "axios";
 // utils
 import { showErrorNotification } from "utils/notifications";
@@ -19,30 +18,20 @@ import CreatePostModal from "./components/CreatePostModal";
 
 const MyPosts: FC = () => {
   const [page] = useState(0);
-  const [posts, setPosts] = useState<IPost[]>([]);
 
   const [isCreatePostModalVisible, setIsCreatePostModalVisible] =
     useState<boolean>(false);
 
-  const limit = 20;
+  const limit = 50;
 
-  const { isLoading, refetch } = useQuery(
+  const { isLoading, refetch, data } = useQuery(
     [POSTS_QUERIES.GET_MY_POSTS, page, limit],
     () => getMyPosts({ page, limit }),
     {
       refetchOnWindowFocus: false,
       retry: false,
-      keepPreviousData: true,
-      onSuccess: (data) => {
-        if (page > 1) {
-          setPosts((prev) => [...prev, ...data]);
-          return;
-        }
-        setPosts(data);
-      },
       onError: (error: AxiosError<AxiosError>) => {
-        if (error.response?.status === 404 || error.response?.status === 401)
-          return;
+        if (error.response?.status === 401) return;
         showErrorNotification(error.response?.data.message);
       },
     }
@@ -79,7 +68,7 @@ const MyPosts: FC = () => {
           <Spin size="large" />
         </Space>
       ) : (
-        <UserPosts posts={posts} />
+        <UserPosts posts={data} />
       )}
       <CreatePostModal
         isModalVisible={isCreatePostModalVisible}
