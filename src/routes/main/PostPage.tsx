@@ -12,11 +12,14 @@ import {
   EditOutlined,
   DeleteOutlined,
   ArrowLeftOutlined,
+  ClockCircleOutlined,
+  UserOutlined,
 } from "@ant-design/icons";
 // components
 import EditPostModal from "./components/EditPostModal";
 import DeletePostModal from "./components/DeletePostModal";
 import {
+  Avatar,
   Button,
   Divider,
   Image,
@@ -34,6 +37,7 @@ import { POSTS_QUERIES } from "constants/queries";
 // utils
 import { showErrorNotification } from "utils/notifications";
 import { POST_IMAGE_URL } from "constants/helpers";
+import { randomColor } from "utils/random-color";
 
 const { Title, Text } = Typography;
 
@@ -59,6 +63,15 @@ const PostPage: FC = () => {
       },
     }
   );
+
+  const date = new Date(data?.createdAt!);
+  const readableDate = date.toLocaleString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+  });
 
   const handleBack = () => {
     navigate(-1);
@@ -153,6 +166,36 @@ const PostPage: FC = () => {
         <Divider style={{ margin: 0 }} />
         <Title level={4}>{data?.shortDescription}</Title>
         <Text style={{ fontSize: 16 }}>{data?.content}</Text>
+        <Divider style={{ margin: "20px 0 15px 0" }} />
+      </Space>
+
+      <Space
+        style={{
+          paddingLeft: 15,
+          alignItems: "center",
+        }}
+      >
+        <ClockCircleOutlined style={{ fontSize: 16, color: "#c2c2c2" }} />
+        <Text type="secondary" style={{ fontSize: 14 }}>
+          {readableDate}
+        </Text>
+        <Divider
+          type="vertical"
+          style={{ margin: 0, height: 30, backgroundColor: "#e2e2e2" }}
+        />
+        <Avatar
+          size={30}
+          style={{
+            backgroundColor: randomColor(),
+            justifyContent: "center",
+            alignItems: "center",
+            display: "flex",
+          }}
+          icon={<UserOutlined style={{ fontSize: 14 }} />}
+        />
+        <Text type="secondary" style={{ fontSize: 16 }}>
+          {data.author.firstName} {data.author.lastName}
+        </Text>
       </Space>
       <EditPostModal
         isModalVisible={isEditPostModalVisible}
