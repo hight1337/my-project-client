@@ -14,6 +14,6 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 Production version:
-### `https://react-university-news-app.onrender.com/`
+[https://react-university-news-app.onrender.com/](https://react-university-news-app.onrender.com/)
 
 
